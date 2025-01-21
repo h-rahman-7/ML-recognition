@@ -10,7 +10,7 @@ This project is a web application that uses **YOLOv8** to detect objects in imag
 
 Below is an example of how the app works.
 
-![Application Screenshot](./ml-object-detection-app.PNG)  
+![Application image](./ml-object-detection-app.PNG)  
 
 ---
 

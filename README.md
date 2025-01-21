@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a web application that uses **YOLOv8** to detect objects in images. Users can upload an image, and the app identifies objects in it using AI. The app runs in a **Docker container** for consistency and ease of deployment. A **Helm chart** is included for deploying the app in a Kubernetes cluster.
+This project is a web application that uses **YOLOv8** to detect objects in images. Users can upload an image, and the app identifies objects in it using AI. The app runs in a **Docker container** for consistency and ease of deployment. While this repository is built as an **ECS project**, it includes a skeletal structure for transitioning to a **Kubernetes EKS project**, with placeholder files such as a **Helm chart** for Kubernetes deployment.
 
 ---
 
@@ -45,4 +45,3 @@ Follow these steps to run the app on your machine:
 
 5. **Access the App**  
    Open your browser and go to [http://localhost:3000](http://localhost:3000).
-

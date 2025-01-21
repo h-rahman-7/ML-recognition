@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habibur's Detection AI Model</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>Habibur's Detection AI Model</h1>
+  </nav>
+
+  <!-- Main Section -->
+  <div class="main-section">
+    <!-- Existing Image Processing Card -->
+    <div class="card">
+      <h2>Test the AI Model</h2>
+      <button class="card-button" onclick="fetchResults()">Test Me Out</button>
+    </div>
+
+    <!-- Camera Functionality Card -->
+    <div class="card">
+      <h2>Use Your Camera</h2>
+      <button class="card-button" onclick="openCameraWindow()">Use Your Camera</button>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div id="results" class="results">
+    <!-- JSON results will be rendered here -->
+    <p>No results available. Please test the AI model or use the camera.</p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

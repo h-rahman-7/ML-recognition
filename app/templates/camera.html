@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camera Object Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <h1>Camera Object Detection</h1>
+  </nav>
+
+  <!-- Main Section -->
+  <div class="main-section">
+    <div class="card">
+      <h2>Real-Time Object Detection</h2>
+      
+      <!-- Button Container -->
+      <div class="button-group">
+        <button class="card-button" onclick="startCamera()">Start Camera</button>
+        <button class="card-button" onclick="stopCamera()">Stop Camera</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Section -->
+  <div id="camera-status" class="results">
+    <!-- Status messages will be rendered here -->
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    async function startCamera() {
+      const statusDiv = document.getElementById('camera-status');
+      statusDiv.style.display = "block"; // Show the status box
+      statusDiv.innerHTML = "Starting camera object detection...";
+
+      try {
+        // Trigger the camera object detection
+        const response = await fetch('/api/use-camera', { method: 'POST' });
+        const result = await response.json();
+
+        if (response.ok) {
+          statusDiv.innerHTML = result.message;
+        } else {
+          statusDiv.innerHTML = `Error: ${result.error}`;
+        }
+      } catch (error) {
+        statusDiv.innerHTML = "Error starting camera object detection.";
+        console.error("Error:", error);
+      }
+    }
+
+    async function stopCamera() {
+      const statusDiv = document.getElementById('camera-status');
+      statusDiv.style.display = "block"; // Show the status box
+      statusDiv.innerHTML = "Stopping camera object detection...";
+
+      try {
+        // Trigger the camera object detection stop
+        const response = await fetch('/api/stop-camera', { method: 'POST' });
+        const result = await response.json();
+
+        if (response.ok) {
+          statusDiv.innerHTML = result.message;
+        } else {
+          statusDiv.innerHTML = `Error: ${result.error}`;
+        }
+      } catch (error) {
+        statusDiv.innerHTML = "Error stopping camera object detection.";
+        console.error("Error:", error);
+      }
+    }
+  </script>
+</body>
+</html>

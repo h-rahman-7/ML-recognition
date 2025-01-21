@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: 590184076390.dkr.ecr.eu-west-2.amazonaws.com/ai-model
+  tag: "latest"
+  pullPolicy: Always
+
+containerPort: 3000
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 3000
+
+ingress:
+  enabled: false

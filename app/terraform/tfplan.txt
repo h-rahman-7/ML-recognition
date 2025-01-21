@@ -1,9 +1,9 @@
 [0m[1mmodule.ecs.data.aws_iam_role.ecs_task_execution_role: Reading...[0m[0m
 [0m[1mmodule.ecs.data.aws_ecr_repository.repo: Reading...[0m[0m
-[0m[1mmodule.route53.data.aws_route53_zone.cgai_zone: Reading...[0m[0m
+[0m[1mmodule.route53.data.aws_route53_zone.mlops_zone: Reading...[0m[0m
 [0m[1mmodule.ecs.data.aws_iam_role.ecs_task_execution_role: Read complete after 0s [id=ecs-task-execution-role][0m
-[0m[1mmodule.route53.data.aws_route53_zone.cgai_zone: Read complete after 1s [id=Z09839262WL8AOYXDJ5FB][0m
-[0m[1mmodule.ecs.data.aws_ecr_repository.repo: Read complete after 1s [id=chess-game][0m
+[0m[1mmodule.route53.data.aws_route53_zone.mlops_zone: Read complete after 1s [id=Z09839262WL8AOYXDJ5FB][0m
+[0m[1mmodule.ecs.data.aws_ecr_repository.repo: Read complete after 1s [id=MLOPs app-][0m
 [0m[1mmodule.ecs.data.aws_ecr_image.latest_image: Reading...[0m[0m
 [0m[1mmodule.ecs.data.aws_ecr_image.latest_image: Read complete after 0s [id=sha256:0d5fb52fabe105ccd622d92cae0ce70fb782ceb4fafa8364d336aac7a25b39aa][0m
 
@@ -15,7 +15,7 @@ Terraform will perform the following actions:
 
 [1m  # aws_s3_bucket_policy.chess_game_state_bucket_policy[0m will be created
 [0m  [32m+[0m[0m resource "aws_s3_bucket_policy" "chess_game_state_bucket_policy" {
-      [32m+[0m[0m bucket = "chess-game-terraform-state"
+      [32m+[0m[0m bucket = "MLOPs app--terraform-state"
       [32m+[0m[0m id     = (known after apply)
       [32m+[0m[0m policy = jsonencode(
             {
@@ -34,7 +34,7 @@ Terraform will perform the following actions:
                       [32m+[0m[0m Principal = {
                           [32m+[0m[0m Service = "elasticloadbalancing.amazonaws.com"
                         }
-                      [32m+[0m[0m Resource  = "arn:aws:s3:::chess-game-terraform-state/*"
+                      [32m+[0m[0m Resource  = "arn:aws:s3:::MLOPs app--terraform-state/*"
                       [32m+[0m[0m Sid       = "ELBAccessLogsPolicy"
                     },
                 ]
@@ -62,7 +62,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m internal                                                     = false
       [32m+[0m[0m ip_address_type                                              = (known after apply)
       [32m+[0m[0m load_balancer_type                                           = "application"
-      [32m+[0m[0m name                                                         = "cg-app-alb"
+      [32m+[0m[0m name                                                         = "mlops-app-alb"
       [32m+[0m[0m name_prefix                                                  = (known after apply)
       [32m+[0m[0m preserve_host_header                                         = false
       [32m+[0m[0m security_groups                                              = (known after apply)
@@ -180,7 +180,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m load_balancing_algorithm_type      = (known after apply)
       [32m+[0m[0m load_balancing_anomaly_mitigation  = (known after apply)
       [32m+[0m[0m load_balancing_cross_zone_enabled  = (known after apply)
-      [32m+[0m[0m name                               = "cg-target-group"
+      [32m+[0m[0m name                               = "mlops-target-group"
       [32m+[0m[0m name_prefix                        = (known after apply)
       [32m+[0m[0m port                               = 3003
       [32m+[0m[0m preserve_client_ip                 = (known after apply)
@@ -217,7 +217,7 @@ Terraform will perform the following actions:
 [0m  [32m+[0m[0m resource "aws_ecs_cluster" "cg_ecs_cluster" {
       [32m+[0m[0m arn      = (known after apply)
       [32m+[0m[0m id       = (known after apply)
-      [32m+[0m[0m name     = "cg-ecs-cluster"
+      [32m+[0m[0m name     = "mlops-ecs-cluster"
       [32m+[0m[0m tags_all = (known after apply)
 
       [32m+[0m[0m setting {
@@ -238,7 +238,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m iam_role                           = (known after apply)
       [32m+[0m[0m id                                 = (known after apply)
       [32m+[0m[0m launch_type                        = "FARGATE"
-      [32m+[0m[0m name                               = "my-cg-service"
+      [32m+[0m[0m name                               = "my-mlops-service"
       [32m+[0m[0m platform_version                   = (known after apply)
       [32m+[0m[0m scheduling_strategy                = "REPLICA"
       [32m+[0m[0m tags_all                           = (known after apply)
@@ -251,7 +251,7 @@ Terraform will perform the following actions:
         }
 
       [32m+[0m[0m load_balancer {
-          [32m+[0m[0m container_name   = "cg-container"
+          [32m+[0m[0m container_name   = "mlops-container"
           [32m+[0m[0m container_port   = 3003
           [32m+[0m[0m target_group_arn = (known after apply)
             [90m# (1 unchanged attribute hidden)[0m[0m
@@ -272,8 +272,8 @@ Terraform will perform the following actions:
             [
               [32m+[0m[0m {
                   [32m+[0m[0m essential    = true
-                  [32m+[0m[0m image        = "713881828888.dkr.ecr.us-east-1.amazonaws.com/chess-game@sha256:0d5fb52fabe105ccd622d92cae0ce70fb782ceb4fafa8364d336aac7a25b39aa"
-                  [32m+[0m[0m name         = "cg-container"
+                  [32m+[0m[0m image        = "713881828888.dkr.ecr.us-east-1.amazonaws.com/MLOPs app-@sha256:0d5fb52fabe105ccd622d92cae0ce70fb782ceb4fafa8364d336aac7a25b39aa"
+                  [32m+[0m[0m name         = "mlops-container"
                   [32m+[0m[0m portMappings = [
                       [32m+[0m[0m {
                           [32m+[0m[0m containerPort = 3003
@@ -286,7 +286,7 @@ Terraform will perform the following actions:
         )
       [32m+[0m[0m cpu                      = "2048"
       [32m+[0m[0m execution_role_arn       = "arn:aws:iam::713881828888:role/ecs-task-execution-role"
-      [32m+[0m[0m family                   = "cg-task"
+      [32m+[0m[0m family                   = "mlops-task"
       [32m+[0m[0m id                       = (known after apply)
       [32m+[0m[0m memory                   = "6144"
       [32m+[0m[0m network_mode             = "awsvpc"
@@ -307,12 +307,12 @@ Terraform will perform the following actions:
       [32m+[0m[0m role       = "ecs-task-execution-role"
     }
 
-[1m  # module.route53.aws_route53_record.cgai_cname_record[0m will be created
-[0m  [32m+[0m[0m resource "aws_route53_record" "cgai_cname_record" {
+[1m  # module.route53.aws_route53_record.mlops_cname_record[0m will be created
+[0m  [32m+[0m[0m resource "aws_route53_record" "mlops_cname_record" {
       [32m+[0m[0m allow_overwrite = (known after apply)
       [32m+[0m[0m fqdn            = (known after apply)
       [32m+[0m[0m id              = (known after apply)
-      [32m+[0m[0m name            = "cgai.habibur-rahman.com"
+      [32m+[0m[0m name            = "mlops.habibur-rahman.com"
       [32m+[0m[0m records         = (known after apply)
       [32m+[0m[0m ttl             = 300
       [32m+[0m[0m type            = "CNAME"
@@ -367,15 +367,15 @@ Terraform will perform the following actions:
               [32m+[0m[0m to_port          = 443
             },
         ]
-      [32m+[0m[0m name                   = "cg-ecs-sg"
+      [32m+[0m[0m name                   = "mlops-ecs-sg"
       [32m+[0m[0m name_prefix            = (known after apply)
       [32m+[0m[0m owner_id               = (known after apply)
       [32m+[0m[0m revoke_rules_on_delete = false
       [32m+[0m[0m tags                   = {
-          [32m+[0m[0m "Name" = "cg-ecs-sg"
+          [32m+[0m[0m "Name" = "mlops-ecs-sg"
         }
       [32m+[0m[0m tags_all               = {
-          [32m+[0m[0m "Name" = "cg-ecs-sg"
+          [32m+[0m[0m "Name" = "mlops-ecs-sg"
         }
       [32m+[0m[0m vpc_id                 = (known after apply)
     }
@@ -383,10 +383,10 @@ Terraform will perform the following actions:
 [1m  # module.vpc.aws_acm_certificate.cert[0m will be created
 [0m  [32m+[0m[0m resource "aws_acm_certificate" "cert" {
       [32m+[0m[0m arn                       = (known after apply)
-      [32m+[0m[0m domain_name               = "cgai.habibur-rahman.com"
+      [32m+[0m[0m domain_name               = "mlops.habibur-rahman.com"
       [32m+[0m[0m domain_validation_options = [
           [32m+[0m[0m {
-              [32m+[0m[0m domain_name           = "cgai.habibur-rahman.com"
+              [32m+[0m[0m domain_name           = "mlops.habibur-rahman.com"
               [32m+[0m[0m resource_record_name  = (known after apply)
               [32m+[0m[0m resource_record_type  = (known after apply)
               [32m+[0m[0m resource_record_value = (known after apply)
@@ -401,7 +401,7 @@ Terraform will perform the following actions:
       [32m+[0m[0m renewal_summary           = (known after apply)
       [32m+[0m[0m status                    = (known after apply)
       [32m+[0m[0m subject_alternative_names = [
-          [32m+[0m[0m "cgai.habibur-rahman.com",
+          [32m+[0m[0m "mlops.habibur-rahman.com",
         ]
       [32m+[0m[0m tags                      = {
           [32m+[0m[0m "Name" = "ecs-cert"
@@ -456,10 +456,10 @@ Terraform will perform the following actions:
       [32m+[0m[0m owner_id               = (known after apply)
       [32m+[0m[0m revoke_rules_on_delete = false
       [32m+[0m[0m tags                   = {
-          [32m+[0m[0m "Name" = "cg-vpc-default-sg"
+          [32m+[0m[0m "Name" = "mlops-vpc-default-sg"
         }
       [32m+[0m[0m tags_all               = {
-          [32m+[0m[0m "Name" = "cg-vpc-default-sg"
+          [32m+[0m[0m "Name" = "mlops-vpc-default-sg"
         }
       [32m+[0m[0m vpc_id                 = (known after apply)
     }
@@ -492,10 +492,10 @@ Terraform will perform the following actions:
             },
         ]
       [32m+[0m[0m tags             = {
-          [32m+[0m[0m "Name" = "cg-vpc}-rt"
+          [32m+[0m[0m "Name" = "mlops-vpc}-rt"
         }
       [32m+[0m[0m tags_all         = {
-          [32m+[0m[0m "Name" = "cg-vpc}-rt"
+          [32m+[0m[0m "Name" = "mlops-vpc}-rt"
         }
       [32m+[0m[0m vpc_id           = (known after apply)
     }
@@ -531,10 +531,10 @@ Terraform will perform the following actions:
       [32m+[0m[0m owner_id                                       = (known after apply)
       [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
       [32m+[0m[0m tags                                           = {
-          [32m+[0m[0m "Name" = "cg-private-sn"
+          [32m+[0m[0m "Name" = "mlops-private-sn"
         }
       [32m+[0m[0m tags_all                                       = {
-          [32m+[0m[0m "Name" = "cg-private-sn"
+          [32m+[0m[0m "Name" = "mlops-private-sn"
         }
       [32m+[0m[0m vpc_id                                         = (known after apply)
     }
@@ -556,10 +556,10 @@ Terraform will perform the following actions:
       [32m+[0m[0m owner_id                                       = (known after apply)
       [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
       [32m+[0m[0m tags                                           = {
-          [32m+[0m[0m "Name" = "cg-vpc-public-1"
+          [32m+[0m[0m "Name" = "mlops-vpc-public-1"
         }
       [32m+[0m[0m tags_all                                       = {
-          [32m+[0m[0m "Name" = "cg-vpc-public-1"
+          [32m+[0m[0m "Name" = "mlops-vpc-public-1"
         }
       [32m+[0m[0m vpc_id                                         = (known after apply)
     }
@@ -581,10 +581,10 @@ Terraform will perform the following actions:
       [32m+[0m[0m owner_id                                       = (known after apply)
       [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
       [32m+[0m[0m tags                                           = {
-          [32m+[0m[0m "Name" = "cg-vpc-public-2"
+          [32m+[0m[0m "Name" = "mlops-vpc-public-2"
         }
       [32m+[0m[0m tags_all                                       = {
-          [32m+[0m[0m "Name" = "cg-vpc-public-2"
+          [32m+[0m[0m "Name" = "mlops-vpc-public-2"
         }
       [32m+[0m[0m vpc_id                                         = (known after apply)
     }
@@ -608,10 +608,10 @@ Terraform will perform the following actions:
       [32m+[0m[0m main_route_table_id                  = (known after apply)
       [32m+[0m[0m owner_id                             = (known after apply)
       [32m+[0m[0m tags                                 = {
-          [32m+[0m[0m "Name" = "cg-vpc"
+          [32m+[0m[0m "Name" = "mlops-vpc"
         }
       [32m+[0m[0m tags_all                             = {
-          [32m+[0m[0m "Name" = "cg-vpc"
+          [32m+[0m[0m "Name" = "mlops-vpc"
         }
     }
 
@@ -635,7 +635,7 @@ Changes to Outputs:
       [32m+[0m[0m id                               = (known after apply)
       [32m+[0m[0m latency_routing_policy           = []
       [32m+[0m[0m multivalue_answer_routing_policy = [90mnull[0m[0m
-      [32m+[0m[0m name                             = "cgai.habibur-rahman.com"
+      [32m+[0m[0m name                             = "mlops.habibur-rahman.com"
       [32m+[0m[0m records                          = (known after apply)
       [32m+[0m[0m set_identifier                   = [90mnull[0m[0m
       [32m+[0m[0m ttl                              = 300

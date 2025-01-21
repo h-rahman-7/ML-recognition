@@ -1,6 +1,6 @@
 # ## My ECS cluster
 # resource "aws_ecs_cluster" "cg_ecs_cluster" {
-#   name = "cg-ecs-cluster"
+#   name = "mlops-ecs-cluster"
 
 #   setting {
 #     name  = "containerInsights"
@@ -8,9 +8,9 @@
 #   }
 # }
 
-# ## My ECS task definitions for my AI Chess game
+# ## My ECS task definitions for my MLOPs app
 # resource "aws_ecs_task_definition" "cg_app_td" {
-#   family                   = "cg-app-td"
+#   family                   = "mlops-app-td"
 #   network_mode             = "awsvpc"
 #   requires_compatibilities = ["FARGATE"]
 #   execution_role_arn       = data.aws_iam_role.ecs_task_execution_role.arn
@@ -20,8 +20,8 @@
 
 #   container_definitions = jsonencode([
 #     {
-#       name      = "cg-container"
-#       image     = "713881828888.dkr.ecr.us-east-1.amazonaws.com/chess-game"
+#       name      = "mlops-container"
+#       image     = "713881828888.dkr.ecr.us-east-1.amazonaws.com/MLOPs app-"
 #       cpu       = 0
 #       essential = true
 #       portMappings = [{
@@ -35,7 +35,7 @@
 
 # ## My ECS service
 # resource "aws_ecs_service" "cg_app_service" {
-#   name            = "cg-app-service"
+#   name            = "mlops-app-service"
 #   cluster         = aws_ecs_cluster.cg_ecs_cluster.id
 #   task_definition = aws_ecs_task_definition.cg_app_td.arn
 #   desired_count   = 1
@@ -49,7 +49,7 @@
 
 #   load_balancer {
 #     target_group_arn = aws_lb_target_group.cg_app_lb_tg.arn
-#     container_name   = "cg-container"
+#     container_name   = "mlops-container"
 #     container_port   = 3002
 #   }
 

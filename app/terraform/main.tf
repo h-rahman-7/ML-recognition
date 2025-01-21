@@ -26,7 +26,7 @@ module "alb" {
   target_group_name = "mlops-target-group"
   target_port       = 3000
   vpc_id            = module.vpc.vpc_id
-  certificate_arn   = "arn:aws:acm:us-east-1:713881828888:certificate/2c9a27e7-a2dd-4a9b-bf4d-f31c8ca34ef9" TODO
+  certificate_arn   = "arn:aws:acm:us-east-1:713881828888:certificate/798567d7-34d5-4134-a119-f21ce9c57b3c"
 }
 
 # ECS Module
@@ -56,7 +56,7 @@ module "ecs" {
   # log_configuration = {
   #   logDriver = "awslogs"
   #   options = {
-  #     awslogs-group         = "/ecs/chess-game"
+  #     awslogs-group         = "/ecs/MLOPs app-"
   #     awslogs-region        = "us-east-1"
   #     awslogs-stream-prefix = "ecs"
   #   }
@@ -108,7 +108,7 @@ module "route53" {
 
 # # KMS Key Resource
 # resource "aws_kms_key" "chess_app_key" {
-#   description             = "KMS key for the Chess App"
+#   description             = "KMS key for the MLOPs app App"
 #   enable_key_rotation     = true
 #   deletion_window_in_days = 30
 
@@ -154,7 +154,7 @@ module "route53" {
 # EOT
 
 #   tags = {
-#     Name        = "chess-app-kms-key"
+#     Name        = "MLOPs app-app-kms-key"
 #     Environment = "production"
 #   }
 # }
@@ -162,23 +162,23 @@ module "route53" {
 
 # # KMS Key Alias (Optional for readability and management)
 # resource "aws_kms_alias" "chess_app_key_alias" {
-#   name          = "alias/chess-app-kms-key"
+#   name          = "alias/MLOPs app-app-kms-key"
 #   target_key_id = aws_kms_key.chess_app_key.id
 # }
 
 # # CloudWatch Log Group for WAF Logs
 # resource "aws_cloudwatch_log_group" "waf_log_group" {
-#   name              = "/aws/waf/cgai-waf-logs"
+#   name              = "/aws/waf/mlops-waf-logs"
 #   retention_in_days = 365 # Retain logs for at least 1 year
 #   kms_key_id        = aws_kms_key.chess_app_key.id # Use your existing KMS key for encryption
 #   tags = {
-#     Name = "cgai-waf-log-group"
+#     Name = "mlops-waf-log-group"
 #   }
 # }
 
 # # WAF Configuration
-# resource "aws_wafv2_web_acl" "cgai_waf" {
-#   name        = "cgai-waf"
+# resource "aws_wafv2_web_acl" "mlops_waf" {
+#   name        = "mlops-waf"
 #   scope       = "REGIONAL" # For ALB
 #   description = "WAF for ALB with Log4j2 protection"
 
@@ -234,8 +234,8 @@ module "route53" {
 # }
 
 # # Logging Configuration for WAF
-# resource "aws_wafv2_web_acl_logging_configuration" "cgai_waf_logging" {
-#   resource_arn = aws_wafv2_web_acl.cgai_waf.arn
+# resource "aws_wafv2_web_acl_logging_configuration" "mlops_waf_logging" {
+#   resource_arn = aws_wafv2_web_acl.mlops_waf.arn
 
 #   log_destination_configs = [
 #     aws_cloudwatch_log_group.waf_log_group.arn
@@ -259,7 +259,7 @@ module "route53" {
 # }
 
 # # Associate WAF with ALB
-# resource "aws_wafv2_web_acl_association" "cgai_waf_association" {
+# resource "aws_wafv2_web_acl_association" "mlops_waf_association" {
 #   resource_arn = module.alb.alb_arn # Replace with the ALB ARN output from your module
-#   web_acl_arn  = aws_wafv2_web_acl.cgai_waf.arn
+#   web_acl_arn  = aws_wafv2_web_acl.mlops_waf.arn
 # }

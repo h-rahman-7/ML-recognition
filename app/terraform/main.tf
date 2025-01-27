@@ -26,7 +26,7 @@ module "alb" {
   target_group_name = "mlops-target-group"
   target_port       = 3000
   vpc_id            = module.vpc.vpc_id
-  certificate_arn   = "arn:aws:acm:us-east-1:713881828888:certificate/798567d7-34d5-4134-a119-f21ce9c57b3c"
+  certificate_arn   = "arn:aws:acm:us-east-1:713881828888:certificate/8ae3babd-a4e8-4a03-879f-f76261d35434"
 }
 
 # ECS Module

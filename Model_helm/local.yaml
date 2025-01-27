@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 590184076390.dkr.ecr.eu-west-2.amazonaws.com/ai-model
+  repository: 713881828888.dkr.ecr.us-east-1.amazonaws.com/mlops
   tag: "latest"
   pullPolicy: Always
 

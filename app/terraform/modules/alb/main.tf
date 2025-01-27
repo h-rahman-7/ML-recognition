@@ -42,7 +42,7 @@ resource "aws_lb_target_group" "mlops_alb_tg" {
 
 ## My ALB listener for HTTP redirecting to port 443
 resource "aws_lb_listener" "mlops_http_listener" {
-  load_balancer_arn = aws_lb.mlops_alb
+  load_balancer_arn = aws_lb.mlops_alb.arn
   port              = "80"
   protocol          = "HTTP"
 
